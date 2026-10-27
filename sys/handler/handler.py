@@ -7,6 +7,7 @@ from datetime import datetime
 sys.path.insert(0, 'sys/lib/omsy')
 try:
 	from omsycgi import CGI
+	from omsymonitoring import OmsyMonitoring
 except ImportError:
 	sys.exit(1)
 
@@ -61,6 +62,9 @@ while True:
 	response = __cgi.response(body)
 	log(f"{__cgi.getReponseCode()}/{mime}: {__cgi.templatepath(__cgi.path)}")
 	sendResponse(sock, 200, mime, response)
+
+	monitoring = OmsyMonitoring()
+	log(monitoring.get_all())
 
 sock.close()
 log("Good Bye.")
