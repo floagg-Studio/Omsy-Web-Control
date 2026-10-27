@@ -16,7 +16,7 @@ sock = socket.socket(fileno=fd)
 from pathlib import Path
 dossier_actuel = Path.cwd()
 # print(dossier_actuel)
-# DEBUG
+# DEBUGs
 
 def log(message, *args):
 	print(
