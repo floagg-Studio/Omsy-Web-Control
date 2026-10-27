@@ -1,0 +1,4 @@
+share/logs/omsy/omsy-server.log
+share/run/omsy-server.pid
+sys/bin/omsyd
+share/config/omsy/omsy.conf

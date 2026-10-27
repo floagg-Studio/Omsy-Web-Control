@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>%{panel.getHtmlTitle()}%</title>
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+	<link rel="stylesheet" type="text/css" href="http://floagg.com/share/lib/floagg_panel/src/min.css">
+	<link rel="stylesheet" type="text/css" href="http://floagg.com/share/lib/floagg_panel/src/main_old.css">
+	<link rel="stylesheet" type="text/css" href="http://floagg.com/share/lib/floagg_panel/src/main.css">
+	<link rel="stylesheet" type="text/css" href="http://floagg.com/share/lib/floagg_panel/src/kit.css">
+</head>
+<body>
+<header class="left-bar" style="padding-top: 16px;">
+	<div class="top-menu">
+		<div class="userinfo">
+			<div class="avatar">
+				<img src="https://zupimages.net/up/26/29/w2x4.png" width="64px" height="64px" style="object-fit: cover;">
+			</div>
+			<div class="info">
+				<span class="username w700">User</span>
+				<span class="sub_username">Il est 20:18</span>
+			</div>
+		</div>
+		<div class="menu-plugins">
+			<li class="sepp-head">Teste</li>
+			<li class="">
+				<a class="categorie-button w700" onclick="this.parentNode.classList.toggle('focus')" href="#">
+					<div class="left">
+						<span class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-wide-connected" viewBox="0 0 16 16"><path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5m0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78zM5.048 3.967l-.087.065zm-.431.355A4.98 4.98 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8zm.344 7.646.087.065z"></path></svg>
+						</span>
+						<span class="text">%s</span>
+					</div>
+					<div class="icon-open">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-373.85 303.85-550h352.3L480-373.85Z"/></svg>
+					</div>
+				</a>
+				<ol class="sub_menu">
+					<li class="sepp-head">%s</li>
+					<li class="">
+						<a href="#"><span class="text">%s</span></a>
+					</li>
+				</ol>
+			</li>
+		</div>
+	</div>
+	<div class="bottom-menu">
+		<div id="publishChangeButton-contenaire" style="display: ;">
+			<button id="publishChangeButton">
+				<span class="icon">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M224.62-160q-27.62 0-46.12-18.5Q160-197 160-224.62V-360h40v135.38q0 9.24 7.69 16.93 7.69 7.69 16.93 7.69H360v40H224.62Zm510.76 0H600v-40h135.38q9.24 0 16.93-7.69 7.69-7.69 7.69-16.93V-360h40v135.38q0 27.62-18.5 46.12Q763-160 735.38-160ZM160-735.38q0-27.62 18.5-46.12Q197-800 224.62-800H360v40H224.62q-9.24 0-16.93 7.69-7.69 7.69-7.69 16.93V-600h-40v-135.38Zm640 0V-600h-40v-135.38q0-9.24-7.69-16.93-7.69-7.69-16.93-7.69H600v-40h135.38q27.62 0 46.12 18.5Q800-763 800-735.38ZM481.54-271.54q13.31 0 22.42-9.11 9.12-9.12 9.12-22.43 0-13.3-9.12-22.42-9.11-9.12-22.42-9.12-13.31 0-22.42 9.12-9.12 9.12-9.12 22.42 0 13.31 9.12 22.43 9.11 9.11 22.42 9.11Zm-20.62-132.23h38.39q1.54-25.54 9.92-42 8.39-16.46 32.31-40.38 30.38-30.39 41.88-51.12 11.5-20.73 11.5-46.11 0-46.31-31.3-75.7-31.31-29.38-80.54-29.38-39.23 0-69.46 19.84-30.24 19.85-47 57.08l36.76 15.46q10.85-25.23 31.5-40.19 20.66-14.96 46.66-14.96 32.84 0 53.81 18.96 20.96 18.96 20.96 49.58 0 18.46-9.12 34.81-9.11 16.34-31.34 36.11-29.93 28.23-42.43 52.15-12.5 23.93-12.5 55.85Z"/></svg>
+				</span>
+				<span class="text">Sauvegarder</span>
+			</button>
+		</div>
+	</div>
+</header>
+<main>
+	<h1 style="padding: 32px;">Welcome to Omsy Server Python / C</h1>
+</main>
+</body>
+</html>
