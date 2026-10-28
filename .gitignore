@@ -2,3 +2,8 @@ share/logs/omsy/omsy-server.log
 share/run/omsy-server.pid
 sys/bin/omsyd
 share/config/omsy/omsy.conf
+usr/.DS_Store
+usr/webinterface/.DS_Store
+sys/lib/omsy/.DS_Store
+/sys/lib/psutil-7.2.2.dist-info
+/sys/lib/psutil

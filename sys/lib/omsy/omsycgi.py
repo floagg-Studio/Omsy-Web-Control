@@ -54,9 +54,17 @@ class CGI:
 		body = body_part
 		while len(body) < content_length:
 			body += sock.recv(4096)
-
-
 		# print(self.templatepath(self.path))
+
+	def cleanPath(self, path):
+		clean = path.strip("/")
+		if clean == "":
+			clean = "index"
+		parts = clean.split("/")
+		if any(p in ("", ".", "..") for p in parts):
+			return None
+
+		return clean
 
 	def templatepath(self, filename):
 		return self.webinterface+filename

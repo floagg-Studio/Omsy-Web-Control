@@ -17,10 +17,14 @@ typedef void (*conf_cb)(const char *key, const StrList *val, void *ud);
 
 /* configuration commune à omsyd et omsyctl (fichier omsy.conf) */
 typedef struct {
-	char path[STR_MAX];   /* racine (absolue)                          */
-	char log[STR_MAX];    /* dossier des logs        (déf. path/share/log) */
-	char run[STR_MAX];    /* dossier des pid files   (déf. path/share/run) */
-	char conf[STR_MAX];   /* dossier des services    (déf. path/conf)      */
+	char path[STR_MAX];
+	char log[STR_MAX];
+	char run[STR_MAX];
+	char conf[STR_MAX];
+	/* NOUVEAU : */
+	char bind_addr[64];   /* défaut : 127.0.0.1 */
+	int  port;            /* défaut : 8990 */
+	int  max_conn;        /* défaut : 64 */
 } OmsyConf;
 
 /* ---------- logs ---------- */

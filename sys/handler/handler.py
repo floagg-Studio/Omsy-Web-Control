@@ -1,70 +1,33 @@
-import os
-import sys
 import socket
 
-from datetime import datetime
+import sys
+sys.path.insert(0, 'sys/lib')
 
-sys.path.insert(0, 'sys/lib/omsy')
-try:
-	from omsycgi import CGI
-	from omsymonitoring import OmsyMonitoring
-except ImportError:
-	sys.exit(1)
+from omsy.response import Response
+from omsy.request import Request
+from omsy.router import _load_module, load
+
 
 fd = int(sys.argv[1])
 sock = socket.socket(fileno=fd)
-# DEBUG
-from pathlib import Path
-dossier_actuel = Path.cwd()
-# print(dossier_actuel)
-# DEBUGs
 
-def log(message, *args):
-	print(
-		f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} "
-		f"([{os.getpid()}/{os.getppid()}/{fd}] Python) {message}",
-		*args,
-		file=sys.stderr
-	)
-
-def sendResponse(sock, http, mime, response):
-	__cgi.setContentType(mime)
-	__cgi.setReponseCode(http)
-	sock.sendall(response)
-
-log(f"Welcome.")
 while True:
-	request = b""
-	try:
-		while b"\r\n\r\n" not in request:
+	# 1. lire les en-têtes (cap 64 Ko)
+	raw = b""
+	while b"\r\n\r\n" not in raw:
+		try:
 			chunk = sock.recv(4096)
-			if not chunk:
-				break
-			request += chunk
-	except (socket.timeout, BlockingIOError, OSError) as e:
-		log(f"TIMEOUT ({e})")
-		break
-	if not request:
-		log("CONNEXION FERMEE par le client")
-		break
+		except (socket.timeout, OSError):
+			break
+		if not chunk:
+			break
+		raw += chunk
+		if len(raw) > 65536:
+			sock.sendall(b"HTTP/1.1 431 Request Header Fields Too Large\r\n\r\n")
+			break
 
-	__cgi = CGI(request, sock)
-	mime, body = __cgi.open(__cgi.templatepath(__cgi.path))
-	if(body == None):
-		sendResponse(sock, 404, "text/html", "<html><body><h1>Welcome to Omsy Server Python / C</h1></body></html>")
-		sock.close()
-		break
-	if(mime == None):
-		sendResponse(sock, 404, "text/html", "<html><body><h1>Welcome to Omsy Server Python / C</h1></body></html>")
-		sock.close()
-		break
-
-	response = __cgi.response(body)
-	log(f"{__cgi.getReponseCode()}/{mime}: {__cgi.templatepath(__cgi.path)}")
-	sendResponse(sock, 200, mime, response)
-
-	monitoring = OmsyMonitoring()
-	log(monitoring.get_all())
+	request = Request(raw, sock);
+	response = load(request)
+	sock.sendall(response.build())
 
 sock.close()
-log("Good Bye.")

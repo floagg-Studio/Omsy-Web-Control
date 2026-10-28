@@ -132,6 +132,17 @@ static void omsy_cb(const char *key, const StrList *v, void *ud) {
 		first_item(v, c->run, sizeof c->run);
 	else if (!strcmp(key, "conf") || !strcmp(key, "confdir"))
 		first_item(v, c->conf, sizeof c->conf);
+	else if (!strcmp(key, "bind_addr")) first_item(v, c->bind_addr, sizeof c->bind_addr);
+	else if (!strcmp(key, "port")) {
+		char tmp[16]; first_item(v, tmp, sizeof tmp);
+		c->port = atoi(tmp);
+		if (c->port <= 0 || c->port > 65535) c->port = 8990;
+	}
+	else if (!strcmp(key, "max_conn")) {
+		char tmp[16]; first_item(v, tmp, sizeof tmp);
+		c->max_conn = atoi(tmp);
+		if (c->max_conn <= 0) c->max_conn = 64;
+	}
 }
 
 /* field vide -> def ; relatif -> base/field */
@@ -154,7 +165,10 @@ int omsy_conf_load(const char *file, OmsyConf *c) {
 	if (!getcwd(cwd, sizeof cwd)) snprintf(cwd, sizeof cwd, ".");
 	if (c->path[0]) resolve(c->path, cwd, "");
 	else            snprintf(c->path, sizeof c->path, "%s", cwd);
-
+	if (!c->bind_addr[0])
+	snprintf(c->bind_addr, sizeof c->bind_addr, "127.0.0.1");
+	if (!c->port) c->port = 8990;
+	if (!c->max_conn) c->max_conn = 64;
 	resolve(c->log,  c->path, "share/log");
 	resolve(c->run,  c->path, "share/run");
 	resolve(c->conf, c->path, "conf");
